@@ -20,6 +20,10 @@ function Banner() {
 
   console.log(Movie);
 
+  function ellipsify(str) {
+    return str?.substr(0, 150) + "...";
+  }
+
   return (
     <header
       className="banner"
@@ -37,7 +41,7 @@ function Banner() {
           <button className="banner_button">Play</button>
           <button className="banner_button">My List</button>
         </div>
-        <h1 className="banner_description">{Movie?.overview}</h1>
+        <h1 className="banner_description">{ellipsify(Movie?.overview)}</h1>
         {/* description */}
       </div>
       <div className="banner_faded"></div>

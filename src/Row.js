@@ -2,6 +2,7 @@ import axios from "./axios";
 import React, { useState, useEffect } from "react";
 import "./row.css";
 import YouTube from "react-youtube";
+import movieTrailer from "movie-trailer";
 
 function Row({ title, fetchUrl, isLargerRow }) {
   const [movies, setMovies] = useState([]);
@@ -22,6 +23,21 @@ function Row({ title, fetchUrl, isLargerRow }) {
     playerVars: {
       autoplay: 1,
     },
+  };
+
+  const handleClick = (movie) => {
+    if (trailerUrl) {
+      setTrailerUrl("");
+    } else {
+      movieTrailer(movie?.title || movie?.name || "")
+        .then((url) => {
+          console.log(url);
+          const urlParam = new URLSearchParams(new URL(url).search);
+          setTrailerUrl(urlParam.get("v"));
+          console.log(setTrailerUrl);
+        })
+        .catch((error) => console.log(error));
+    }
   };
 
   return (
